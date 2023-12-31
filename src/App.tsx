@@ -1,19 +1,19 @@
-import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Header from './components/Header/Header';
-import Home from './components/Home/Home';
-import Base from './components/Base';
-import Toppings from './components/Toppings/Toppings';
-import Order from './components/Order/Order';
+import { useContext, useState } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { Pizza } from './App.types';
 import { BaseType } from './components/Base/Base.types';
 import { ToppingType } from './components/Toppings/Toppings.types';
+import { AnimatePresence } from 'framer-motion';
+import { ModalContext } from './contexts/ModalContext';
+import { Header, Home, Base, Toppings, Order, Modal } from './components';
 
 const App = () => {
   const [pizza, setPizza] = useState<Pizza>({
-    base: '',
+    base: '' as BaseType,
     toppings: [],
   });
+  const location = useLocation();
+  const { setShowModal } = useContext(ModalContext);
 
   const addBase = (base: BaseType) => {
     setPizza({ ...pizza, base });
@@ -32,34 +32,43 @@ const App = () => {
   return (
     <>
       <Header />
-      <Routes>
-        <Route
-          path='/'
-          element={<Home />}
-        />
-        <Route
-          path='/base'
-          element={
-            <Base
-              addBase={addBase}
-              pizza={pizza}
-            />
-          }
-        />
-        <Route
-          path='/toppings'
-          element={
-            <Toppings
-              addTopping={addTopping}
-              pizza={pizza}
-            />
-          }
-        />
-        <Route
-          path='/order'
-          element={<Order pizza={pizza} />}
-        />
-      </Routes>
+      <Modal />
+      <AnimatePresence
+        mode='wait'
+        onExitComplete={() => setShowModal(false)}
+      >
+        <Routes
+          location={location}
+          key={location.key}
+        >
+          <Route
+            path='/'
+            element={<Home />}
+          />
+          <Route
+            path='/base'
+            element={
+              <Base
+                addBase={addBase}
+                pizza={pizza}
+              />
+            }
+          />
+          <Route
+            path='/toppings'
+            element={
+              <Toppings
+                addTopping={addTopping}
+                pizza={pizza}
+              />
+            }
+          />
+          <Route
+            path='/order'
+            element={<Order pizza={pizza} />}
+          />
+        </Routes>
+      </AnimatePresence>
     </>
   );
 };

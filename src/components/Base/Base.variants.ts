@@ -13,6 +13,12 @@ export const containerVariants: Variants = {
       delay: 0.5,
     },
   },
+  exit: {
+    x: '-100vw',
+    transition: {
+      ease: 'easeInOut',
+    },
+  },
 };
 
 export const nextVarients: Variants = {

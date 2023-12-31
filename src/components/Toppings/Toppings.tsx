@@ -20,6 +20,7 @@ const Toppings = ({ addTopping, pizza }: ToppingProps) => {
       variants={containerVariants}
       initial='hidden'
       animate='visible'
+      exit='exit'
     >
       <h3>Step 2: Choose Toppings</h3>
       <ul>

@@ -13,6 +13,7 @@ const Base = ({ addBase, pizza }: BaseProps) => {
       variants={containerVariants}
       initial='hidden'
       animate='visible'
+      exit='exit'
     >
       <h3>Step 1: Choose Your Base</h3>
       <ul>

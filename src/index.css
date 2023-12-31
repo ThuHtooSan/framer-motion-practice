@@ -116,3 +116,46 @@ li span.active::before {
 .order p {
   margin: 20px auto;
 }
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 999;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 1.2rem;
+  max-width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  background: white;
+  padding: 15px 20px;
+}
+
+.modal * {
+  color: #000;
+}
+
+.modal button {
+  border: 1px solid #424242;
+}
+
+.loader {
+  margin: 40px auto;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+}
